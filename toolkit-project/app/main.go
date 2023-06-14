@@ -8,6 +8,6 @@ import (
 
 func main() {
 	var tools toolkit.Tools
-	s := tools.randomString(10)
+	s := tools.RandomString(10)
 	fmt.Println("Random String:", s)
 }

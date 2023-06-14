@@ -2,10 +2,10 @@ package toolkit
 
 import "testing"
 
-func TestTools_randonString(t *testing.T) {
+func TestTools_RandonString(t *testing.T) {
 
 	var testTools Tools
-	s := testTools.randomString(10)
+	s := testTools.RandomString(10)
 	if len(s) != 10 {
 		t.Error("wrong length random string returned")
 	}
