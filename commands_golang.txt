@@ -1,0 +1,961 @@
+https://www.tutorialgateway.org/go-programs/
+https://github.com/StephenGrider/algocasts
+
+go run main.go
+go build main.go
+go fmt
+go install
+go get
+go test
+-------------------------------------------------------------------------------
+// How to create a workspace for go modules in Golang//
+Create a folder in D directory ( named toolkit-project): D:\goprojects\tookit-project
+Go to VSCODE and click on File menu ---> save workspace as : toolkit.code-workspace
+Create a new folder inside of ( toolkit-project folder) and named it as "toolkit".
+Create another folder inside of ( toolkit-project folder) and named it as "app".
+Go to VSCODE and add "toolkit" and "app" folders using the File menu ---> add folders to workspace option.
+
+PS D:\goprojects\tookit-project\toolkit>
+PS D:\goprojects\tookit-project\toolkit> go mod init github.com/sgarg2023/golangprojectpractice/toolkit
+go: creating new go.mod: module github.com/sgarg2023/golangprojectpractice/toolkit
+PS D:\goprojects\tookit-project\toolkit> 
+PS D:\goprojects\tookit-project\toolkit> cd ../app
+PS D:\goprojects\tookit-project\app> 
+PS D:\goprojects\tookit-project\app> 
+PS D:\goprojects\tookit-project\app> go mod init myapp
+go: creating new go.mod: module myapp
+PS D:\goprojects\tookit-project\app> 
+
+Go to the main folder: toolkit-project
+
+PS D:\goprojects\tookit-project> ls
+
+
+    Directory: D:\goprojects\tookit-project
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        6/14/2023  11:09 PM                app
+d-----        6/14/2023  11:08 PM                toolkit
+-a----        6/14/2023  10:59 PM             75 toolkit.code-workspace
+
+
+PS D:\goprojects\tookit-project>
+PS D:\goprojects\tookit-project> go work init toolkit app
+PS D:\goprojects\tookit-project>
+PS D:\goprojects\tookit-project> ls
+
+
+    Directory: D:\goprojects\tookit-project
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        6/14/2023  11:09 PM                app
+d-----        6/14/2023  11:08 PM                toolkit
+-a----        6/14/2023  11:11 PM             35 go.work
+-a----        6/14/2023  10:59 PM             75 toolkit.code-workspace
+
+
+PS D:\goprojects\tookit-project>                    
+PS D:\goprojects\tookit-project> cat go.work
+go 1.20
+
+use (
+        ./app
+        ./toolkit
+)
+PS D:\goprojects\tookit-project>
+
+
+go test .
+-----------------------------------------------------------------------------------
+package main
+
+import "fmt"
+
+func main() {
+
+	var card string = "Ace of spades"
+	fmt.Println(card)
+	newcard := "my my"
+	card = "Five of Diamonds"
+	fmt.Println(card)
+	fmt.Println(newcard)
+	//newcard := "hi five" //error : no new variable on left side of :=
+	newcard = "hi five"
+	fmt.Println(newcard)
+
+}
+-----------------------------------------------------------------------------------
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	resp, err := http.Get("http://google.com")
+
+	if err != nil {
+		fmt.Println("Error occured")
+	}
+
+	fmt.Println(resp)
+	bs := make([]byte, 99999)
+	resp.Body.Read(bs)
+	fmt.Println("-------------------------------------------")
+	fmt.Println(string(bs))
+}
+----------------------------------------------------------------------------------
+
+
+package main
+
+import "fmt"
+
+var deckSize int
+
+func main() {
+	deckSize = 50
+	fmt.Println(deckSize)
+}
+
+
+50
+-------------------------------------------------------------------------------------
+
+Is the following code valid?  Why or why not?
+
+package main
+ 
+import "fmt"
+ 
+func main() {
+  deckSize = 52
+  fmt.Println(deckSize)
+}
+
+---------------------------------------------------------------------------
+package main
+
+import "fmt"
+
+func main() {
+
+	card := newCard()
+	fmt.Println(card)
+
+}
+
+func newCard() string {
+	return "Five of Diamonds"
+}
+-------------------------------------------------------------------------------
+main.go
+
+package main
+
+func main() {
+	printState()
+}
+
+
+state.go
+
+package main
+
+import "fmt"
+
+func printState() {
+	fmt.Println("California")
+}
+
+-------------------------------------------------------------------------------
+Append() fucntion doesnot modify the existing slice, Instead, it return a new slice that we assign back to the variable of cards.
+
+
+Example of slice usage :
+
+package main
+
+import "fmt"
+
+func main() {
+	//use of slice
+	card := []string{"Six of Diamonds", newCard()}
+	fmt.Println(card)
+}
+
+func newCard() string {
+	return "Ace of Diamonds"
+
+}
+
+Output:
+PS D:\goprojects\cards>
+PS D:\goprojects\cards> go run main.go
+[Six of Diamonds Ace of Diamonds]
+
+-------------------------------------------------------------------------------
+package main
+
+import "fmt"
+
+func main() {
+	//use of slice
+	card := []string{"Six of Diamonds", newCard()}
+	card = append(card, "Five of Diamonds")
+	for i, vcard := range card {
+		fmt.Println(i, vcard)
+	}
+	//fmt.Println(card)
+}
+
+func newCard() string {
+	return "Ace of Diamonds"
+
+}
+
+
+PS D:\goprojects\cards> go run main.go
+0 Six of Diamonds
+1 Ace of Diamonds
+2 Five of Diamonds
+PS D:\goprojects\cards>
+
+-----------------------------------------------------------------------------
+
+Creating Deck Program:
+
+main.go-----
+package main
+
+import "fmt"
+
+func main() {
+	//use of slice
+	card := deck{"Six of Diamonds", newCard()}
+	card = append(card, "Five of Diamonds")
+	for i, vcard := range card {
+		fmt.Println(i, vcard)
+	}
+	//fmt.Println(card)
+}
+
+func newCard() string {
+	return "Ace of Diamonds"
+
+}
+
+
+deck.go-----
+package main
+
+type deck []string
+
+Output:
+
+PS D:\goprojects\cards> go run main.go deck.go
+0 Six of Diamonds
+1 Ace of Diamonds 
+2 Five of Diamonds
+PS D:\goprojects\cards>
+
+------------------------------------------------------------------------------------
+Printcard function added :
+
+main.go
+------------
+package main
+
+func main() {
+	//use of slice
+	card := deck{"Six of Diamonds", newCard()}
+	card = append(card, "Five of Diamonds")
+	card.printDeck()
+}
+
+func newCard() string {
+	return "Ace of Diamonds"
+
+}
+-----------------------
+
+deck.go
+--------------
+package main
+
+import "fmt"
+
+type deck []string
+
+func (d deck) printDeck() {
+
+	for i, card := range d {
+		fmt.Println(i, card)
+	}
+}
+----------------------------
+Output:
+
+PS D:\goprojects\cards> go run main.go deck.go
+0 Six of Diamonds
+1 Ace of Diamonds
+2 Five of Diamonds
+PS D:\goprojects\cards>
+
+-----------------------------------------------------
+
+Created a newDeck function:
+
+main.go
+package main
+
+func main() {
+	//use of slice
+	card := newDeck()
+	card.printDeck()
+}
+
+deck.go
+
+package main
+
+import "fmt"
+
+type deck []string
+
+func (d deck) printDeck() {
+
+	for i, card := range d {
+		fmt.Println(i, card)
+	}
+}
+
+func newDeck() deck {
+	cards := deck{}
+	cardSuits := []string{"Club", "Diamonds", "Spades", "Heart"}
+	cardValue := []string{"Ace", "Two", "Three", "Four"}
+
+	for _, suit := range cardSuits {
+		for _, value := range cardValue {
+			cards = append(cards, value+" of "+suit)
+		}
+	}
+
+	return cards
+}
+
+Output:
+
+PS D:\goprojects\cards> go run main.go deck.go
+0 Ace of Club
+1 Two of Club      
+2 Three of Club    
+3 Four of Club     
+4 Ace of Diamonds  
+5 Two of Diamonds  
+6 Three of Diamonds
+7 Four of Diamonds 
+8 Ace of Spades    
+9 Two of Spades    
+10 Three of Spades 
+11 Four of Spades  
+12 Ace of Heart    
+13 Two of Heart    
+14 Three of Heart
+15 Four of Heart
+PS D:\goprojects\cards> 
+
+-------------------------------------------------------------
+Created a Deal() function
+
+main.go
+----------------
+
+package main
+
+import "fmt"
+
+func main() {
+	//use of slice
+	card := newDeck()
+
+	dealDeck, otherDeck := deal(card, 5)
+
+	fmt.Println("-----------------Print deal deck----------------")
+	dealDeck.printDeck()
+	fmt.Println("-----------------Print other deck---------------")
+	otherDeck.printDeck()
+
+	card.printDeck()
+}
+
+----------------------------------
+deck.go
+---------------------
+package main
+
+import "fmt"
+
+type deck []string
+
+func (d deck) printDeck() {
+
+	for i, card := range d {
+		fmt.Println(i, card)
+	}
+}
+
+func newDeck() deck {
+	cards := deck{}
+	cardSuits := []string{"Club", "Diamonds", "Spades", "Heart"}
+	cardValue := []string{"Ace", "Two", "Three", "Four"}
+
+	for _, suit := range cardSuits {
+		for _, value := range cardValue {
+			cards = append(cards, value+" of "+suit)
+		}
+	}
+
+	return cards
+}
+
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
+}
+----------------------------------------------------------------
+
+Output:
+
+PS D:\goprojects\cards> go run main.go deck.go
+-----------------Print deal deck----------------
+0 Ace of Club
+1 Two of Club
+2 Three of Club
+3 Four of Club
+4 Ace of Diamonds
+-----------------Print other deck---------------
+0 Two of Diamonds
+1 Three of Diamonds
+2 Four of Diamonds
+3 Ace of Spades
+4 Two of Spades
+5 Three of Spades
+6 Four of Spades
+7 Ace of Heart
+8 Two of Heart
+9 Three of Heart
+10 Four of Heart
+0 Ace of Club
+1 Two of Club
+2 Three of Club
+3 Four of Club
+4 Ace of Diamonds
+5 Two of Diamonds
+6 Three of Diamonds
+7 Four of Diamonds
+8 Ace of Spades
+9 Two of Spades
+10 Three of Spades
+11 Four of Spades
+12 Ace of Heart
+13 Two of Heart
+14 Three of Heart
+15 Four of Heart
+PS D:\goprojects\cards>
+-----------------------------------------------------
+//deck_test.go -----> how to do testing in go language
+// Added 3 testcases to deck_test.go file.
+
+package main
+
+import "testing"
+
+func TestNewDeck(t *testing.T) {
+	d := newDeck()
+
+	if len(d) != 16 {
+		t.Errorf("Expected deck length to be 2000 but received %v", len(d))
+	}
+
+	if d[0] != "Ace of Club" {
+		t.Errorf("The first card expected is Ace of club but found %v", d[0])
+	}
+
+	if d[len(d)-1] != "Four of Heart" {
+		t.Errorf("The last card oif the deck expected to be Four of Heart but found %v", d[len(d)-1])
+	}
+}
+
+
+Output
+PS D:\goprojects\cards> go test
+PASS
+ok      cards   0.268s
+PS D:\goprojects\cards> 
+---------------------------------------------------------
+
+Added few more testcases to deck_test.go file:
+
+deck_test.go:
+-----------------------
+package main
+
+import (
+	"os"
+	"testing"
+)
+
+func TestNewDeck(t *testing.T) {
+	d := newDeck()
+
+	if len(d) != 16 {
+		t.Errorf("Expected deck length to be 2000 but received %v", len(d))
+	}
+
+	if d[0] != "Ace of Club" {
+		t.Errorf("The first card expected is Ace of club but found %v", d[0])
+	}
+
+	if d[len(d)-1] != "Four of Heart" {
+		t.Errorf("The last card oif the deck expected to be Four of Heart but found %v", d[len(d)-1])
+	}
+}
+
+func TestFileToSaveAndNewDeckFromFile(t *testing.T) {
+
+	os.Remove("__decktesting")
+	newD := newDeck()
+	newD.fileToSave("__decktesting")
+	tryDeck := newDeckFromFile("__decktesting")
+
+	if len(tryDeck) != 16 {
+		t.Errorf("Expected legnth of deck to be 16 but received %v", len(tryDeck))
+	}
+
+}
+
+-------------------------------------------------------------------
+
+Structures in go language:
+
+package main
+
+import "fmt"
+
+type person struct {
+	firstName string
+	lastName  string
+}
+
+func main() {
+
+	alex := person{"Alex", "Anderson"}
+	shubh := person{firstName: "Shubhra", lastName: "Garg"}
+	fmt.Println(alex)
+	fmt.Println(shubh)
+
+}
+
+
+Output:
+
+PS D:\goprojects\structuresproject> go run main.go
+{Alex Anderson}
+{Shubhra Garg}
+PS D:\goprojects\structuresproject>
+PS D:\goprojects\structuresproject>
+
+---------------------------------------------------------------------
+
+package main
+
+import "fmt"
+
+type person struct {
+	firstName string
+	lastName  string
+}
+
+func main() {
+
+	alex := person{"Alex", "Anderson"}
+	shubh := person{firstName: "Shubhra", lastName: "Garg"}
+	fmt.Println(alex)
+	fmt.Println(shubh)
+
+	var mystruct person
+	fmt.Println(mystruct)
+	fmt.Printf("%+v", mystruct)
+	fmt.Printf("\n")
+	mystruct.firstName = "ganesh"
+	mystruct.lastName = "garg"
+	fmt.Println(mystruct)
+	fmt.Printf("%+v", mystruct)
+
+}
+
+
+Output:
+
+PS D:\goprojects\structuresproject> go run main.go
+{Alex Anderson}
+{Shubhra Garg}
+{ }
+{firstName: lastName:}
+{ganesh garg}
+{firstName:ganesh lastName:garg}
+----------------------------------------------------------------
+//structure within a structure in go language//
+
+package main
+
+import "fmt"
+
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
+type person struct {
+	firstName string
+	lastName  string
+	contact   contactInfo
+}
+
+func main() {
+
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Corbert",
+		contact: contactInfo{
+			email:   "jim.corbert@gmail.com",
+			zipCode: 56100,
+		},
+	}
+
+	fmt.Printf("%+v", jim)
+}
+
+Output:
+PS D:\goprojects\structuresproject> go run main.go
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+PS D:\goprojects\structuresproject> 
+PS D:\goprojects\structuresproject> 
+-----------------------------------------------------------------
+//Write structure as receiver function
+
+package main
+
+import "fmt"
+
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
+type person struct {
+	firstName string
+	lastName  string
+	contact   contactInfo
+}
+
+func main() {
+
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Corbert",
+		contact: contactInfo{
+			email:   "jim.corbert@gmail.com",
+			zipCode: 56100,
+		},
+	}
+	
+	jim.print()
+
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
+
+
+output:
+
+PS D:\goprojects\structuresproject> go run main.go
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+PS D:\goprojects\structuresproject>
+
+----------------------------------------------------------------
+// sructure didn't got updated with the newName
+
+package main
+
+import "fmt"
+
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
+type person struct {
+	firstName string
+	lastName  string
+	contact   contactInfo
+}
+
+func main() {
+
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Corbert",
+		contact: contactInfo{
+			email:   "jim.corbert@gmail.com",
+			zipCode: 56100,
+		},
+	}
+
+	jim.print()
+	fmt.Printf("\n")
+	jim.updateStruct("Fluke")
+	fmt.Printf("\n")
+	jim.print()
+
+}
+
+func (p person) updateStruct(newFirstName string) {
+	p.firstName = newFirstName
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
+
+Output:
+PS D:\goprojects\structuresproject> go run main.go
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+PS D:\goprojects\structuresproject>
+--------------------------------------------------------------------------------
+/// go is pass by value ---> the update function didn't worked
+
+
+package main
+
+import "fmt"
+
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
+type person struct {
+	firstName string
+	lastName  string
+	contact   contactInfo
+}
+
+func main() {
+
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Corbert",
+		contact: contactInfo{
+			email:   "jim.corbert@gmail.com",
+			zipCode: 56100,
+		},
+	}
+
+	jim.print()
+	fmt.Printf("\n")
+	jim.updateStruct("Fluke")
+	fmt.Printf("\n")
+	fmt.Printf("\n Willing to see whether Jim's firstname got updated or not\n")
+	jim.print()
+
+}
+
+func (p person) updateStruct(newFirstName string) {
+	p.firstName = newFirstName
+	fmt.Printf("\n Willing to see the receiver copy value\n")
+	p.print()
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
+
+output:
+
+PS D:\goprojects\structuresproject> go run main.go
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+
+ Willing to see the receiver copy value
+{firstName:Fluke lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+
+ Willing to see whether Jim's firstname got updated or not
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+PS D:\goprojects\structuresproject>
+
+------------------------------------------------------------------------------------------
+//Structures with Pointers
+
+package main
+
+import "fmt"
+
+type contactInfo struct {
+	email   string
+	zipCode int
+}
+
+type person struct {
+	firstName string
+	lastName  string
+	contact   contactInfo
+}
+
+func main() {
+
+	jim := person{
+		firstName: "Jim",
+		lastName:  "Corbert",
+		contact: contactInfo{
+			email:   "jim.corbert@gmail.com",
+			zipCode: 56100,
+		},
+	}
+
+	jim.print()
+	fmt.Printf("\n")
+	jimPointer := &jim
+	jimPointer.updateStruct("Fluke")
+	fmt.Printf("\n")
+	fmt.Printf("\n Willing to see whether Jim's firstName got updated or not\n")
+	jim.print()
+
+}
+
+func (personPointer *person) updateStruct(newFirstName string) {
+	(*personPointer).firstName = newFirstName
+	//fmt.Printf("\n Willing to see the receiver copy value\n")
+	//p.print()
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
+
+
+Output:
+
+PS D:\goprojects\structuresproject> go run main.go
+{firstName:Jim lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+
+
+ Willing to see whether Jim's firstname got updated or not
+{firstName:Fluke lastName:Corbert contact:{email:jim.corbert@gmail.com zipCode:56100}}
+PS D:\goprojects\structuresproject> 
+
+----------------------------------------------------------------------------------------------
+// Random String//
+
+PS D:\goprojects\toolkit-project> ls      
+
+
+    Directory: D:\goprojects\toolkit-project
+
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        6/15/2023  12:47 AM                app
+d-----        6/15/2023  12:47 AM                toolkit
+-a----        6/15/2023  12:47 AM             35 go.work
+-a----        6/15/2023  12:47 AM             75 toolkit.code-workspace
+
+
+PS D:\goprojects\toolkit-project>
+PS D:\goprojects\toolkit-project> 
+
+----------------------------------------------------
+tools.go
+
+package toolkit
+
+import (
+	"crypto/rand"
+)
+
+const randomStringSource = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_+-*"
+
+type Tools struct{}
+
+func (t *Tools) RandomString(n int) string {
+	s, r := make([]rune, n), []rune(randomStringSource)
+	//fmt.Println(s)
+	//fmt.Println("\n----------------------------\n")
+	//fmt.Println(r)
+	for i := range s {
+		p, _ := rand.Prime(rand.Reader, len(r))
+		//fmt.Println(i, p)
+		x, y := p.Uint64(), uint64(len(r))
+		s[i] = r[x%y]
+	}
+
+	return string(s)
+}
+--------------------------------
+app/go.mod
+
+module myapp
+
+go 1.20
+---------------------------------
+toolkit/go.mod
+
+module github.com/sgarg2023/golangprojectpractice/toolkit
+
+go 1.20
+
+--------------------------------
+main.go
+
+package main
+
+import (
+	"fmt"
+
+	"github.com/sgarg2023/golangprojectpractice/toolkit"
+)
+
+func main() {
+	var tools toolkit.Tools
+	s := tools.RandomString(10)
+	fmt.Println("Random String:", s)
+}
+
+---------------------------------
+tools_test.go
+
+package toolkit
+
+import "testing"
+
+func TestTools_RandonString(t *testing.T) {
+
+	var testTools Tools
+	s := testTools.RandomString(10)
+	if len(s) != 10 {
+		t.Error("wrong length random string returned")
+	}
+
+}
+
+------------------------------------
+
+
