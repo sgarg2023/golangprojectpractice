@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "controllers"
+		},
+		{
+			"path": "domain"
+		},
+		{
+			"path": "services"
+		},
+		{
+			"path": "app"
+		}
+	]
+}

@@ -22,3 +22,9 @@ func (t *Tools) RandomString(n int) string {
 
 	return string(s)
 }
+
+type UploadFilename struct {
+	OriginalFileName string
+	NewFileName      string
+	FileSize         int64
+}
