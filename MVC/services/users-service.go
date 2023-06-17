@@ -1,8 +1,6 @@
-package domain
+package services
 
-import (
-	"github.com/sgarg2023/golangprojectpractice/mvc/domain"
-)
+import "domain"
 
 func GetUser(userId int64) (*domain.User, error) {
 	return domain.GetUser(userId)

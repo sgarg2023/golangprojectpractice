@@ -1,9 +1,9 @@
 package app
 
 import (
+	"controllers"
 	"net/http"
-
-	"github.com/sgarg2023/golangprojectpractice/mvc/controllers"
+	//"github.com/sgarg2023/golangprojectpractice/mvc/controllers"
 )
 
 func StartApp() {
