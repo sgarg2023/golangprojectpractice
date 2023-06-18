@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	app "myapp"
-	//"github.com/sgarg2023/golangprojectpractice/mvc/app"
+	//app "myapp"
+	"github.com/sgarg2023/golangprojectpractice/mvc/app"
 )
 
 func main() {

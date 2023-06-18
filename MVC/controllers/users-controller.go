@@ -3,8 +3,11 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
-	"services"
+
+	//"services"
 	"strconv"
+
+	"github.com/sgarg2023/golangprojectpractice/mvc/services"
 )
 
 /*func GetUser(resp http.ResponseWriter, req *http.Request) {
