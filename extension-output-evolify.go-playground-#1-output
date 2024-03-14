@@ -1,0 +1,2 @@
+./prog.go:10:1: syntax error: unexpected semicolon or newline before {
+./prog.go:13:2: syntax error: non-declaration statement outside function body

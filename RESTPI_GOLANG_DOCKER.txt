@@ -1,0 +1,62 @@
+MAIN.GO:
+
+Package main
+
+func main() {
+	addr := ":3000"
+	s1 := NewAPIServer(addr)
+	s2 := NewAPIServer(":5000")
+	s1.Run()
+	s2.Run()
+}
+-----------------------------------------------------------------
+api.go
+package main
+
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/gorilla/mux"
+)
+
+type APIServer struct {
+	addr string
+}
+
+func NewAPIServer(addr string) *APIServer {
+	return &APIServer{
+		addr: addr,
+	}
+}
+
+func (s *APIServer) Run() {
+	router := mux.NewRouter()
+	fmt.Printf("Server started on address %s", s.addr)
+	http.ListenAndServe(s.addr, router)
+}
+-----------------------------------------------------------------
+PS D:\goprojects\RESTAPI> go run ./main.go
+        have (string)
+PS D:\goprojects\RESTAPI> go build https://github.com/sgarg2023/golangprojectpractice/rest-golang
+cannot find package "https:/github.com/sgarg2023/golangprojectpractice/rest-golang" in any of:
+        C:\Program Files\Go\src\https:\github.com\sgarg2023\golangprojectpractice\rest-golang (from $GOROOT)
+go: malformed module path "https://github.com/sgarg2023/golangprojectpractice/rest-golang": double slash
+PS D:\goprojects\RESTAPI>
+PS D:\goprojects\RESTAPI>                                                                      lid char ':'
+PS D:\goprojects\RESTAPI> go mod init github.com/sgarg2023/golangprojectpractice/rest-golang   
+go: creating new go.mod: module github.com/sgarg2023/golangprojectpractice/rest-golang             
+PS D:\goprojects\RESTAPI>
+PS D:\goprojects\RESTAPI> go get github.com/gorilla/mux
+go: added github.com/gorilla/mux v1.8.1
+PS D:\goprojects\RESTAPI>
+PS D:\goprojects\RESTAPI> go run ./main.go
+# command-line-arguments
+.\main.go:5:8: undefined: NewAPIServer
+.\main.go:6:8: undefined: NewAPIServer
+PS D:\goprojects\RESTAPI> go build
+PS D:\goprojects\RESTAPI> go run .\rest-golang.exe   //wrong command//
+main module (github.com/sgarg2023/golangprojectpractice/rest-golang) does not contain package github.com/sgarg2023/golangprojectpractice/rest-golang/rest-golang.exe 
+PS D:\goprojects\RESTAPI> .\rest-golang.exe
+Server started on address :3000
+
