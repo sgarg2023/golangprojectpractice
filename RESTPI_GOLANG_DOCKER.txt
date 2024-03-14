@@ -59,4 +59,94 @@ PS D:\goprojects\RESTAPI> go run .\rest-golang.exe   //wrong command//
 main module (github.com/sgarg2023/golangprojectpractice/rest-golang) does not contain package github.com/sgarg2023/golangprojectpractice/rest-golang/rest-golang.exe 
 PS D:\goprojects\RESTAPI> .\rest-golang.exe
 Server started on address :3000
+-------------------------------------------------------------------------
 
+SUBHRA@Shubhra MINGW64 /d
+$ cd goprojects/
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$
+
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   GO_RESTAPI_MONGDB/go.sum
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        GO_RESTAPI_MONGDB/go.work
+        RESTAPI/
+        RESTPI_GOLANG_DOCKER.txt
+        extension-output-evolify.go-playground-#1-output
+        helloworld_microservice/
+        path_split.go
+        type_conversion.go
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$ git add .
+warning: in the working copy of 'GO_RESTAPI_MONGDB/go.sum', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'GO_RESTAPI_MONGDB/go.work', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'RESTAPI/go.mod', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'RESTAPI/go.sum', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'RESTAPI/restapi.code-workspace', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'extension-output-evolify.go-playground-#1-output', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'helloworld_microservice/helloworld_microservice.code-workspace', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'helloworld_microservice/main.go', LF will be replaced by CRLF the next time Git touches it
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   GO_RESTAPI_MONGDB/go.sum
+        new file:   GO_RESTAPI_MONGDB/go.work
+        new file:   RESTAPI/api.go
+        new file:   RESTAPI/go.mod
+        new file:   RESTAPI/go.sum
+        new file:   RESTAPI/main.go
+        new file:   RESTAPI/rest-golang.exe
+        new file:   RESTAPI/restapi.code-workspace
+        new file:   RESTPI_GOLANG_DOCKER.txt
+        new file:   extension-output-evolify.go-playground-#1-output
+        new file:   helloworld_microservice/helloworld_microservice.code-workspace
+        new file:   helloworld_microservice/main.go
+        new file:   path_split.go
+        new file:   type_conversion.go
+
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$ git commit -m "Golang with RESTAPI and DOCKET=R"
+[master dc2956d] Golang with RESTAPI and DOCKET=R
+ 14 files changed, 162 insertions(+), 10 deletions(-)
+ create mode 100644 GO_RESTAPI_MONGDB/go.work
+ create mode 100644 RESTAPI/api.go
+ create mode 100644 RESTAPI/go.mod
+ create mode 100644 RESTAPI/go.sum
+ create mode 100644 RESTAPI/main.go
+ create mode 100644 RESTAPI/rest-golang.exe
+ create mode 100644 RESTAPI/restapi.code-workspace
+ create mode 100644 RESTPI_GOLANG_DOCKER.txt
+ create mode 100644 extension-output-evolify.go-playground-#1-output
+ create mode 100644 helloworld_microservice/helloworld_microservice.code-workspace
+ create mode 100644 helloworld_microservice/main.go
+ create mode 100644 path_split.go
+ create mode 100644 type_conversion.go
+
+SUBHRA@Shubhra MINGW64 /d/goprojects (master)
+$
+------------------------------------------------------------------------------------------------------------
